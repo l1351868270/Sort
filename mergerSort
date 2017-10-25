@@ -11,33 +11,31 @@ void mergeSort(int arr[],int p,int r);
 int main()
 {
 
-	std::cout << "Hello world!"<< std::endl;
-	int a[4] = {2,1,3,0};
-	//merge(a, 0, 1, 4);
-	mergeSort(a, 0, 3);
-	//for (int i = 0;i < 4; ++i)
-	//{
-	//	std::cout << "a[" << i <<"]=" << a[i] << std::endl;
-	//}
+	
+	int a[] = {5,4,3,2,1,0};
+	int mergeSortN = sizeof(a) / sizeof(a[0]);
+
+	mergeSort(a, 0, mergeSortN-1);
+
+	//打印排序后的数组
+	for (int i = 0;i < mergeSortN; ++i)
+	{
+		std::cout << "a[" << i <<"]=" << a[i] << std::endl;
+	}
 	system("pause");
 
     return 0;
 }
-void mergeSort(int arr[], int x, int y)
+void mergeSort(int arr[], int p, int r)
 {
-	//int x = p;
-	//int y = r;
-	if (x < y)
+
+	if (p < r)
 	{
-		int q = float((x + y) / 2);
-		//mergeSort(arr, x, q);
-		mergeSort(arr, q+1, y);
-		merge(arr,x,q,y);
-		std::cout << q << std::endl;
-		for (int i = 0; i < 4; ++i)
-		{
-			std::cout << "a[" << i << "]=" << arr[i] << std::endl;
-		}
+		int q = float((p + r) / 2);
+		mergeSort(arr, p, q);
+		mergeSort(arr, q+1, r);
+		merge(arr,p,q,r);
+		
 	}
 	
 
@@ -54,12 +52,10 @@ void merge(int arr[], int p, int q, int r)
 	for (int i = 0; i < n1; ++i)
 	{
 		L[i] = arr[p + i ];
-		std::cout << "L[" << i << "]=" << L[i] << std::endl;
 	}
 	for (int j = 0 ; j < n2; ++j) 
 	{
 		R[j] = arr[q + j+1];
-		std::cout << "R[" << j << "]=" << R[j] << std::endl;
 	}
 	
 	int i = 0, j = 0,k=p;
@@ -91,4 +87,7 @@ void merge(int arr[], int p, int q, int r)
 		++j;
 		++k;
 	}
+
+	delete L ;
+	delete R;
 }
